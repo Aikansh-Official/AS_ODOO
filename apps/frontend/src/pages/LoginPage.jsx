@@ -42,11 +42,6 @@ export function LoginPage({ onNavigate }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!otpSent) {
-      showToast('error', 'Please click Send OTP first.');
-      return;
-    }
-
     if (!validateOtp(otp)) {
       showToast('error', 'OTP must be exactly 6 digits.');
       return;
@@ -126,16 +121,16 @@ export function LoginPage({ onNavigate }) {
                 type="text"
                 inputMode="numeric"
                 required
-                disabled={!otpSent}
+                
                 maxLength={6}
                 value={otp}
                 onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                placeholder={otpSent ? 'Enter 6-digit OTP' : 'Send OTP first'}
+                placeholder='Enter 6-digit OTP'
                 className="w-full rounded-xl border border-outline-variant bg-surface-container-low pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all disabled:cursor-not-allowed disabled:opacity-60"
               />
             </div>
             <p className="mt-1.5 font-body text-[11px] leading-5 text-on-surface-variant">
-              OTP verification is required before dashboard access.
+              Type the 6-digit OTP you received by email.
             </p>
           </div>
 
@@ -189,3 +184,4 @@ export function LoginPage({ onNavigate }) {
     </section>
   );
 }
+

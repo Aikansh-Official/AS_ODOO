@@ -54,11 +54,6 @@ export function CompanySignupPage({ onNavigate }) {
   };
 
   const handleVerify = async () => {
-    if (!otpSent) {
-      showToast('error', 'Please click Send OTP first.');
-      return;
-    }
-
     if (!validateOtp(otp)) {
       showToast('error', 'OTP must be exactly 6 digits.');
       return;
@@ -184,9 +179,9 @@ export function CompanySignupPage({ onNavigate }) {
                 Email OTP
                 <span className="relative">
                   <KeyRound className="absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-on-surface-variant" />
-                  <input className={iconInputClass} required disabled={!otpSent} inputMode="numeric" maxLength={6} value={otp} onChange={(event) => setOtp(event.target.value.replace(/\D/g, '').slice(0, 6))} placeholder={otpSent ? 'Enter 6-digit OTP' : 'Send OTP first'} />
+                  <input className={iconInputClass} required  inputMode="numeric" maxLength={6} value={otp} onChange={(event) => setOtp(event.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='Enter 6-digit OTP' />
                 </span>
-                <span className="font-body text-[11px] leading-5 text-on-surface-variant">OTP field unlocks after the account details are accepted.</span>
+                <span className="font-body text-[11px] leading-5 text-on-surface-variant">Type the 6-digit OTP you received by email.</span>
               </label>
 
               <label className="mt-1 flex items-start gap-3 font-body text-xs leading-6 text-on-surface-variant">
@@ -222,3 +217,4 @@ export function CompanySignupPage({ onNavigate }) {
     </section>
   );
 }
+
