@@ -1,6 +1,90 @@
 {
-  "users": [],
-  "companies": [],
+  "users": [
+    {
+      "id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "account_type": "company",
+      "full_name": "Shreyansh",
+      "email": "shreyanshsachan26@gmail.com",
+      "password_hash": "$2a$12$apI3ymfMB3/9V9KhV9MOAOQhaIRlEAE75BppZwsOXc73ZJ71ZzsT2",
+      "phone": null,
+      "is_email_verified": true,
+      "created_at": "2026-07-12T09:25:40.424Z",
+      "updated_at": "2026-07-12T09:56:42.004Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "e3f53cec-2f3c-4bff-ac33-ebb6da3e6b35",
+      "owner_user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "company_name": "Chintels",
+      "industry": "Logistics & Delivery",
+      "fleet_size": "11-50 vehicles",
+      "primary_fleet_type": "Truck",
+      "invite_code": "CHINT-EDFBFD",
+      "created_at": "2026-07-12T09:25:40.424Z"
+    }
+  ],
   "employee_profiles": [],
-  "email_otps": []
+  "email_otps": [
+    {
+      "id": "8488110c-b842-4e37-8cd9-b7ee7d9caa5e",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "signup",
+      "otp_hash": "53b248c90f5e569a7546aa0e6d64a931b895cc281065769f1d23b536d1a6e9db",
+      "expires_at": "2026-07-12T09:35:40.425Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:28:58.314Z",
+      "created_at": "2026-07-12T09:25:40.426Z"
+    },
+    {
+      "id": "8050e697-2620-4908-a74d-21d8d7afd411",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "signup",
+      "otp_hash": "24ceb2c4140c1ac7192f68198a7648ac5993a095255aea0aed6d7cc26ec4a39f",
+      "expires_at": "2026-07-12T09:38:58.313Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:29:48.431Z",
+      "created_at": "2026-07-12T09:28:58.315Z"
+    },
+    {
+      "id": "fe7c6f25-5b15-443a-ae5a-bc5c8a8e1109",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "signup",
+      "otp_hash": "133a758072f5def991f2667580f65b166cd7df437b1fdf8da171123c40bee98e",
+      "expires_at": "2026-07-12T09:39:48.431Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:29:56.412Z",
+      "created_at": "2026-07-12T09:29:48.432Z"
+    },
+    {
+      "id": "898402b1-1fde-4891-b7b2-8b584f711ff5",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "signup",
+      "otp_hash": "9947ffcc2d5a431dc7566724bfa7d25232d381662be7543b3d7e5d6f8d90fb1d",
+      "expires_at": "2026-07-12T09:39:56.412Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:31:19.301Z",
+      "created_at": "2026-07-12T09:29:56.413Z"
+    },
+    {
+      "id": "94304002-bf42-4b95-a013-a038b9c4420f",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "signup",
+      "otp_hash": "3e9f271ee01cff1f6effb64fc1dbfa35d19d6d3c8dbe12bc9624f2ea01a9e5a5",
+      "expires_at": "2026-07-12T09:41:19.301Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:31:55.903Z",
+      "created_at": "2026-07-12T09:31:19.302Z"
+    },
+    {
+      "id": "5f6dcd77-02b8-4d24-8e6f-e9d5d04919f6",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "login",
+      "otp_hash": "f1f5f7703133725a95f6c9f28edd334c8e5b50feedee78464036e7e571bc9410",
+      "expires_at": "2026-07-12T10:06:20.044Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T09:56:42.003Z",
+      "created_at": "2026-07-12T09:56:20.044Z"
+    }
+  ]
 }

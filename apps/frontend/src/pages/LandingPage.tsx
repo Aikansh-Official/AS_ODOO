@@ -18,7 +18,20 @@ import { CompanySignupPage } from './CompanySignupPage';
 import { EmployeeSignupPage } from './EmployeeSignupPage';
 
 export function LandingPage() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState(() => {
+    return sessionStorage.getItem('activeTab') || 'home';
+  });
+
+  const handleNavigate = (tab: string) => {
+    if (tab === 'home') {
+      // Logout: clear persisted state
+      sessionStorage.removeItem('activeTab');
+    } else {
+      sessionStorage.setItem('activeTab', tab);
+    }
+    setActiveTab(tab);
+  };
+
   const isDashboard = activeTab === 'dashboard';
   const isHome = activeTab === 'home';
 
@@ -26,7 +39,7 @@ export function LandingPage() {
     <div className={isDashboard ? 'relative h-screen w-screen overflow-hidden text-on-surface' : 'relative min-h-screen w-screen overflow-x-hidden bg-background text-on-surface flex flex-col'}>
       {!isDashboard && activeTab !== 'home' && <BackgroundScene />}
 
-      {!isDashboard && <Navbar active={activeTab} setActive={setActiveTab} />}
+      {!isDashboard && <Navbar active={activeTab} setActive={handleNavigate} />}
 
       <main
         className={
@@ -56,7 +69,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="w-full flex flex-col items-center gap-16"
               >
-                <Hero onNavigate={setActiveTab} />
+                <Hero onNavigate={handleNavigate} />
                 <FeaturesSection />
               </motion.div>
             )}
@@ -81,7 +94,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="w-full flex justify-center items-center"
               >
-                <LoginPage onNavigate={setActiveTab} />
+                <LoginPage onNavigate={handleNavigate} />
               </motion.div>
             )}
             {activeTab === 'signup' && (
@@ -93,7 +106,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="w-full flex justify-center items-center"
               >
-                <SignupRolePage onNavigate={setActiveTab} />
+                <SignupRolePage onNavigate={handleNavigate} />
               </motion.div>
             )}
             {activeTab === 'signupCompany' && (
@@ -105,7 +118,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="w-full flex justify-center items-center"
               >
-                <CompanySignupPage onNavigate={setActiveTab} />
+                <CompanySignupPage onNavigate={handleNavigate} />
               </motion.div>
             )}
             {activeTab === 'signupEmployee' && (
@@ -117,7 +130,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="w-full flex justify-center items-center"
               >
-                <EmployeeSignupPage onNavigate={setActiveTab} />
+                <EmployeeSignupPage onNavigate={handleNavigate} />
               </motion.div>
             )}
             {activeTab === 'dashboard' && (
@@ -129,7 +142,7 @@ export function LandingPage() {
                 transition={{ duration: 0.35, ease: 'easeInOut' }}
                 className="h-full w-full"
               >
-                <Dashboard onNavigate={setActiveTab} />
+                <Dashboard onNavigate={handleNavigate} />
               </motion.div>
             )}
           </AnimatePresence>
