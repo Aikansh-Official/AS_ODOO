@@ -45,7 +45,7 @@ export function FeaturesSection() {
   };
 
   return (
-    <section id="features" className="w-full max-w-5xl flex flex-col items-center justify-center px-4">
+    <section id="features" className="w-full max-w-5xl flex flex-col items-center justify-center px-4 py-4">
       {/* Title */}
       <div className="text-center mb-6">
         <span className="font-mono-label text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
@@ -57,7 +57,7 @@ export function FeaturesSection() {
       </div>
 
       {/* Horizontal Tabs Selection bar */}
-      <div className="w-full overflow-x-auto flex gap-1.5 justify-start md:justify-center p-1 bg-surface-dim/40 rounded-xl border border-white/5 mb-6 max-w-4xl scrollbar-none whitespace-nowrap">
+      <div className="w-full overflow-x-auto flex gap-1.5 justify-start md:justify-center p-1 bg-white rounded-xl border border-outline-variant mb-6 max-w-4xl scrollbar-none whitespace-nowrap shadow-sm">
         {FEATURES.map((feature, idx) => {
           const isActive = idx === activeIndex;
           const FIcon = feature.icon;
@@ -70,12 +70,12 @@ export function FeaturesSection() {
               {isActive && (
                 <motion.span
                   layoutId="active-feature-tab"
-                  className="absolute inset-0 rounded-lg bg-white/5 border border-white/10"
+                  className="absolute inset-0 rounded-lg bg-secondary-container border border-outline-variant shadow-sm"
                   transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                 />
               )}
               <FIcon className={`h-3.5 w-3.5 ${isActive ? 'text-primary' : 'text-on-surface-variant'}`} />
-              <span className={isActive ? 'text-white' : ''}>{feature.title}</span>
+              <span className={isActive ? 'text-on-surface' : ''}>{feature.title}</span>
             </button>
           );
         })}
@@ -86,14 +86,14 @@ export function FeaturesSection() {
         {/* Left Arrow Button */}
         <button
           onClick={handlePrev}
-          className="absolute left-[-20px] md:left-[-54px] z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-surface-dim/80 backdrop-blur-md text-on-surface-variant transition-all hover:text-on-surface hover:border-white/20 active:scale-95 cursor-pointer shadow-md"
+          className="absolute left-[-20px] md:left-[-54px] z-20 flex h-10 w-10 items-center justify-center rounded-full border border-outline bg-white text-on-surface-variant transition-all hover:text-primary hover:border-primary active:scale-95 cursor-pointer shadow-md"
           aria-label="Previous Feature"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
 
         {/* Feature Card Wrapper (Frosted Glass) */}
-        <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.02] p-6 md:p-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_24px_50px_-12px_rgba(0,0,0,0.8)] backdrop-blur-3xl min-h-[380px] flex items-center">
+        <div className="relative w-full overflow-hidden rounded-2xl border border-outline-variant bg-white p-6 md:p-10 shadow-[0_16px_40px_rgba(15,23,42,0.08)] min-h-[380px] flex items-center">
           <div className="w-full">
             <AnimatePresence mode="wait" initial={false} custom={direction}>
               <motion.div
@@ -115,7 +115,7 @@ export function FeaturesSection() {
         {/* Right Arrow Button */}
         <button
           onClick={handleNext}
-          className="absolute right-[-20px] md:right-[-54px] z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-surface-dim/80 backdrop-blur-md text-on-surface-variant transition-all hover:text-on-surface hover:border-white/20 active:scale-95 cursor-pointer shadow-md"
+          className="absolute right-[-20px] md:right-[-54px] z-20 flex h-10 w-10 items-center justify-center rounded-full border border-outline bg-white text-on-surface-variant transition-all hover:text-primary hover:border-primary active:scale-95 cursor-pointer shadow-md"
           aria-label="Next Feature"
         >
           <ChevronRight className="h-5 w-5" />
@@ -135,7 +135,7 @@ export function FeaturesSection() {
             >
               <div
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  isActive ? 'w-6 bg-primary' : 'w-2 bg-white/20 group-hover:bg-white/40'
+                  isActive ? 'w-6 bg-primary' : 'w-2 bg-outline group-hover:bg-on-surface-variant'
                 }`}
               />
             </button>

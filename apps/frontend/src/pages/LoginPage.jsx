@@ -25,7 +25,7 @@ export function LoginPage({ onNavigate }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: -15 }}
         transition={{ duration: 0.4 }}
-        className="w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-8 md:p-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_24px_50px_-12px_rgba(0,0,0,0.8)] backdrop-blur-3xl"
+        className="w-full overflow-hidden rounded-2xl border border-outline-variant bg-white p-8 shadow-[0_16px_40px_rgba(15,23,42,0.08)] md:p-10"
       >
         {/* Header */}
         <div className="flex flex-col items-center text-center">
@@ -50,7 +50,7 @@ export function LoginPage({ onNavigate }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="operator@urbanflow.com"
-              className="w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
+              className="w-full rounded-xl border border-outline-variant bg-surface-container-low pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
             />
           </div>
 
@@ -63,15 +63,15 @@ export function LoginPage({ onNavigate }) {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
+              placeholder="Password"
+              className="w-full rounded-xl border border-outline-variant bg-surface-container-low pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
             />
           </div>
 
           {/* Remember & Forgot */}
           <div className="flex items-center justify-between text-[11px] font-body text-on-surface-variant">
             <label className="flex items-center gap-1.5 cursor-pointer">
-              <input type="checkbox" className="accent-primary rounded bg-white/5 border-white/10" />
+              <input type="checkbox" className="accent-primary rounded border-outline-variant bg-white" />
               <span>Remember station</span>
             </label>
             <a href="#" className="hover:text-primary transition-colors">
@@ -84,7 +84,7 @@ export function LoginPage({ onNavigate }) {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-tertiary py-3 font-body text-sm font-semibold text-white shadow-[0_4px_16px_rgba(59,130,246,0.3)] transition-transform hover:scale-[1.02] active:scale-98 cursor-pointer disabled:opacity-55"
+              className="group relative flex items-center justify-center gap-2 rounded-xl bg-primary py-3 font-body text-sm font-semibold text-white shadow-[0_4px_16px_rgba(255,122,0,0.28)] transition-transform hover:scale-[1.02] active:scale-98 cursor-pointer disabled:opacity-55"
             >
               {isLoading ? (
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -98,7 +98,7 @@ export function LoginPage({ onNavigate }) {
             <button
               type="button"
               onClick={() => onNavigate('home')}
-              className="rounded-xl border border-white/10 bg-white/5 py-3 font-body text-sm font-semibold text-on-surface hover:bg-white/10 transition-colors cursor-pointer"
+              className="rounded-xl border border-outline-variant bg-surface-container-low py-3 font-body text-sm font-semibold text-on-surface hover:border-primary hover:text-primary transition-colors cursor-pointer"
             >
               Cancel
             </button>

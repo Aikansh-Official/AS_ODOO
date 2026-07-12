@@ -8,7 +8,7 @@ export function FeatureCard({ icon: Icon, title, description }: FeatureItem) {
     <div className="flex flex-col md:grid md:grid-cols-12 gap-8 w-full items-stretch min-h-[360px]">
       {/* Left Column: Text & Meta Details */}
       <div className="md:col-span-5 flex flex-col justify-center text-left">
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]">
+        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(255,122,0,0.16)]">
           <Icon className="h-6 w-6" strokeWidth={2} />
         </span>
 
@@ -22,7 +22,7 @@ export function FeatureCard({ icon: Icon, title, description }: FeatureItem) {
 
         {/* Decorative logistics tags */}
         <div className="mt-6 flex flex-wrap gap-2">
-          <span className="text-[10px] font-mono-label px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-on-surface-variant">
+          <span className="text-[10px] font-mono-label px-2.5 py-1 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant">
             Logistics Layer v4.0
           </span>
           <span className="text-[10px] font-mono-label px-2.5 py-1 rounded-full bg-primary/10 border border-primary/10 text-primary">
@@ -32,9 +32,9 @@ export function FeatureCard({ icon: Icon, title, description }: FeatureItem) {
       </div>
 
       {/* Right Column: Beautiful Framer Motion Animations */}
-      <div className="md:col-span-7 flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.01] overflow-hidden min-h-[220px] md:min-h-full relative shadow-inner">
+      <div className="md:col-span-7 flex items-center justify-center rounded-2xl border border-outline-variant bg-surface-container-high overflow-hidden min-h-[220px] md:min-h-full relative shadow-inner">
         {/* Grid lines inside container for technical look */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#CBD5E166_1px,transparent_1px),linear-gradient(to_bottom,#CBD5E166_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
         
         <div className="w-full h-full flex items-center justify-center p-6 relative z-10">
           <FeatureVisualizer title={title} />
@@ -77,10 +77,10 @@ function RealTimeRoutingVisual() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-[280px]">
-      <div className="w-full aspect-[2/1] relative border border-white/5 rounded-xl bg-surface-dim/40 overflow-hidden">
+      <div className="w-full aspect-[2/1] relative border border-outline-variant rounded-xl bg-white overflow-hidden">
         {/* Nodes */}
-        <div className="absolute left-[10%] top-[50%] -translate-y-1/2 w-3 h-3 rounded-full bg-secondary border-2 border-background z-20" />
-        <div className="absolute right-[10%] top-[50%] -translate-y-1/2 w-3 h-3 rounded-full bg-primary border-2 border-background z-20" />
+        <div className="absolute left-[10%] top-[50%] -translate-y-1/2 w-3 h-3 rounded-full bg-secondary border-2 border-white z-20" />
+        <div className="absolute right-[10%] top-[50%] -translate-y-1/2 w-3 h-3 rounded-full bg-primary border-2 border-white z-20" />
         
         {/* Path SVG */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 280 140">
@@ -91,7 +91,7 @@ function RealTimeRoutingVisual() {
             stroke={routeBlocked ? "var(--color-error)" : "var(--color-primary)"}
             strokeWidth="3"
             strokeDasharray={routeBlocked ? "4 4" : "0"}
-            animate={{ stroke: routeBlocked ? "#f43f5e" : "#3b82f6" }}
+            animate={{ stroke: routeBlocked ? "#E53E3E" : "#FF7A00" }}
             transition={{ duration: 0.5 }}
           />
 
@@ -161,19 +161,19 @@ function RealTimeRoutingVisual() {
 /* 2. Live Traffic Intelligence: Sweeping radar screen */
 function LiveTrafficVisual() {
   return (
-    <div className="relative w-40 h-40 rounded-full border border-white/10 bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+    <div className="relative w-40 h-40 rounded-full border border-outline-variant bg-white flex items-center justify-center overflow-hidden">
       {/* Radar rings */}
-      <div className="absolute w-32 h-32 rounded-full border border-white/5" />
-      <div className="absolute w-24 h-24 rounded-full border border-white/5" />
-      <div className="absolute w-16 h-16 rounded-full border border-white/5" />
-      <div className="absolute w-8 h-8 rounded-full border border-white/5" />
+      <div className="absolute w-32 h-32 rounded-full border border-outline-variant" />
+      <div className="absolute w-24 h-24 rounded-full border border-outline-variant" />
+      <div className="absolute w-16 h-16 rounded-full border border-outline-variant" />
+      <div className="absolute w-8 h-8 rounded-full border border-outline-variant" />
 
       {/* Grid cross lines */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-full h-px bg-white/5" />
+        <div className="w-full h-px bg-surface-container-high" />
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="h-full w-px bg-white/5" />
+        <div className="h-full w-px bg-surface-container-high" />
       </div>
 
       {/* Sweeper arm */}
@@ -208,7 +208,7 @@ function PredictiveETAVisual() {
   return (
     <div className="w-full max-w-[260px] flex flex-col gap-4">
       {/* Frosted details dashboard card */}
-      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 flex items-center justify-between">
+      <div className="p-4 rounded-xl bg-white border border-outline-variant flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
             <Clock className="w-5 h-5" />
@@ -227,13 +227,13 @@ function PredictiveETAVisual() {
           >
             {eta}m
           </motion.span>
-          <span className="text-[9px] font-mono-label text-emerald-400">Live Calibration</span>
+          <span className="text-[9px] font-mono-label text-tertiary">Live Calibration</span>
         </div>
       </div>
 
       {/* Map line progress slider */}
       <div className="relative h-6 flex items-center">
-        <div className="absolute w-full h-1 bg-white/5 rounded-full" />
+        <div className="absolute w-full h-1 bg-surface-container-high rounded-full" />
         <motion.div 
           className="absolute left-0 h-1 bg-primary rounded-full"
           animate={{ width: ["15%", "85%"] }}
@@ -275,13 +275,13 @@ function MultiModalVisual() {
           <motion.div
             key={idx}
             animate={{
-              backgroundColor: IsActive ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.0)",
-              borderColor: IsActive ? "rgba(59,130,246,0.2)" : "rgba(255,255,255,0.03)",
+              backgroundColor: IsActive ? "rgba(226,232,240,0.9)" : "rgba(255,255,255,0.0)",
+              borderColor: IsActive ? "rgba(255,122,0,0.22)" : "rgba(226,232,240,0.9)",
             }}
-            className={`p-3 rounded-xl border flex items-center justify-between text-left transition-colors`}
+            className="p-3 rounded-xl border flex items-center justify-between text-left transition-colors bg-white"
           >
             <div className="flex items-center gap-3">
-              <span className={`h-8 w-8 rounded-lg flex items-center justify-center ${IsActive ? 'bg-primary/20 text-primary border border-primary/20' : 'bg-white/5 text-on-surface-variant'}`}>
+              <span className={`h-8 w-8 rounded-lg flex items-center justify-center ${IsActive ? 'bg-primary/20 text-primary border border-primary/20' : 'bg-surface-container-high text-on-surface-variant'}`}>
                 <MIcon className="w-4 h-4" />
               </span>
               <div>
@@ -307,7 +307,7 @@ function SmartAlertsVisual() {
         initial={{ y: 5, opacity: 0.8 }}
         animate={{ y: [5, -5, 5] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="p-5 rounded-2xl bg-surface-low border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-md relative"
+        className="p-5 rounded-2xl bg-white border border-outline-variant shadow-[0_12px_30px_rgba(15,23,42,0.08)] relative"
       >
         {/* Glow behind warning */}
         <div className="absolute inset-0 -z-10 rounded-2xl bg-error/5 blur-md" />
@@ -318,13 +318,13 @@ function SmartAlertsVisual() {
           </span>
           <div className="text-left flex-1">
             <span className="text-xs font-semibold text-on-surface block">Congestion Warning</span>
-            <span className="text-[10px] font-mono-label text-on-surface-variant block mt-0.5">Route A-12 Delay • +12m ETA</span>
+            <span className="text-[10px] font-mono-label text-on-surface-variant block mt-0.5">Route A-12 Delay - +12m ETA</span>
             <div className="mt-3.5 flex gap-2">
               <button className="text-[9px] font-mono-label px-2.5 py-1.5 rounded-lg bg-primary text-white border border-primary/20 flex items-center gap-1 cursor-pointer">
                 <Navigation className="w-2.5 h-2.5" />
                 Reroute (-8m)
               </button>
-              <button className="text-[9px] font-mono-label px-2.5 py-1.5 rounded-lg bg-white/5 border border-white/5 text-on-surface-variant hover:bg-white/10 cursor-pointer">
+              <button className="text-[9px] font-mono-label px-2.5 py-1.5 rounded-lg bg-surface-container-high border border-outline-variant text-on-surface-variant hover:bg-white/40 cursor-pointer">
                 Dismiss
               </button>
             </div>
@@ -349,7 +349,7 @@ function AnalyticsVisual() {
   return (
     <div className="w-full max-w-[240px] flex flex-col gap-4">
       {/* Visual Analytics Bar Chart */}
-      <div className="h-28 flex items-end gap-2.5 justify-center border-b border-white/10 pb-1 relative">
+      <div className="h-28 flex items-end gap-2.5 justify-center border-b border-outline-variant pb-1 relative">
         {bars.map((bar, idx) => (
           <motion.div
             key={idx}
@@ -365,7 +365,7 @@ function AnalyticsVisual() {
             }}
           >
             {/* Gloss shine inside bar */}
-            <div className="absolute inset-0 bg-white/10 w-full h-[50%]" />
+            <div className="absolute inset-0 bg-white/40 w-full h-[50%]" />
           </motion.div>
         ))}
       </div>

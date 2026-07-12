@@ -37,7 +37,7 @@ export function AboutSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="border border-white/10 bg-white/[0.02] p-5 rounded-2xl flex flex-col items-center justify-center text-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_10px_30px_rgba(0,0,0,0.5)] backdrop-blur-2xl"
+              className="rounded-2xl border border-outline-variant bg-white p-5 text-center shadow-[0_12px_30px_rgba(15,23,42,0.08)] flex flex-col items-center justify-center"
             >
               <p className="font-mono-label text-2xl font-bold text-primary">
                 {stat.value}

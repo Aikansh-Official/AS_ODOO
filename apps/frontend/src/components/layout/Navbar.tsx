@@ -13,10 +13,10 @@ interface NavbarProps {
 
 export function Navbar({ active, setActive }: NavbarProps) {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-10">
+    <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-outline-variant bg-white/90 px-6 py-4 shadow-sm backdrop-blur-md md:px-10">
       <Logo />
 
-      <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-surface-container-low/50 p-1.5 backdrop-blur-xl md:flex">
+      <nav className="hidden items-center gap-1 rounded-full border border-outline-variant bg-surface-container-high p-1 md:flex">
         {NAV_LINKS.map((link) => (
           <button
             key={link.id}
@@ -26,24 +26,24 @@ export function Navbar({ active, setActive }: NavbarProps) {
             {active === link.id && (
               <motion.span
                 layoutId="nav-active-pill"
-                className="absolute inset-0 rounded-full bg-on-surface"
+                className="absolute inset-0 rounded-full bg-white shadow-sm ring-1 ring-outline-variant"
                 transition={{ type: 'spring', stiffness: 400, damping: 32 }}
               />
             )}
-            <span className={`relative z-10 ${active === link.id ? 'text-surface' : ''}`}>
+            <span className={`relative z-10 ${active === link.id ? 'text-on-surface' : ''}`}>
               {link.label}
             </span>
           </button>
         ))}
       </nav>
 
-      <div className="flex items-center justify-end w-[132px]">
+      <div className="flex w-[132px] items-center justify-end">
         <button
           onClick={() => setActive('login')}
-          className={`px-5 py-2 font-body text-xs font-semibold rounded-full border transition-all cursor-pointer ${
+          className={`rounded-full border px-5 py-2 font-body text-xs font-semibold transition-all cursor-pointer ${
             active === 'login'
-              ? 'bg-primary text-white border-primary shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-              : 'border-white/10 bg-white/5 text-on-surface-variant hover:text-white hover:bg-white/10'
+              ? 'border-primary bg-primary text-white shadow-[0_8px_20px_rgba(255,122,0,0.18)]'
+              : 'border-outline bg-white text-on-surface-variant hover:border-primary hover:text-primary'
           }`}
         >
           Sign In

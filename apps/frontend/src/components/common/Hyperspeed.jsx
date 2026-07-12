@@ -29,14 +29,14 @@ const DEFAULT_EFFECT_OPTIONS = {
   carShiftX: [-0.8, 0.8],
   carFloorSeparation: [0, 5],
   colors: {
-    roadColor: 0x080f24,        // Dark slate blue road
-    islandColor: 0x030712,      // Midnight blue island
-    background: 0x030712,       // Background
+    roadColor: 0x1A202C,        // Charcoal road
+    islandColor: 0x102A43,      // Deep navy island
+    background: 0x1A202C,       // Background
     shoulderLines: 0xffffff,
     brokenLines: 0xffffff,
-    leftCars: [0x3b82f6, 0x0ea5e9, 0x1d4ed8],  // Logistics blue hues
-    rightCars: [0xffffff, 0xe2e8f0, 0x94a3b8], // Silver and white headlights
-    sticks: 0x3b82f6
+    leftCars: [0xFF7A00, 0xDD6B20, 0xF6AD55],  // Safety orange tracking lights
+    rightCars: [0xffffff, 0xF5F7FA, 0xCBD5E1], // Clear white headlights
+    sticks: 0x319795
   }
 };
 

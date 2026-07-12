@@ -2,49 +2,49 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Logistics Command palette: White and dark shades of blue */
-  --color-surface: #0a1128;
-  --color-surface-dim: #050a18;
-  --color-surface-bright: #1b264f;
-  --color-surface-container-lowest: #02040a;
-  --color-surface-container-low: #080f24;
-  --color-surface-container: #0c1633;
-  --color-surface-container-high: #14224c;
-  --color-surface-container-highest: #1d2f66;
+  /* Professional truck tracking palette: white surfaces, deep navy text, safety orange, and teal status accents */
+  --color-surface: #FFFFFF;
+  --color-surface-dim: #EDF2F7;
+  --color-surface-bright: #F8FAFC;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F8FAFC;
+  --color-surface-container: #FFFFFF;
+  --color-surface-container-high: #F1F5F9;
+  --color-surface-container-highest: #E2E8F0;
   
-  --color-on-surface: #ffffff;
-  --color-on-surface-variant: #94a3b8;
+  --color-on-surface: #102A43;
+  --color-on-surface-variant: #4A5568;
   --color-inverse-surface: #ffffff;
   --color-inverse-on-surface: #0f172a;
   
-  --color-outline: #223056;
-  --color-outline-variant: #111a36;
+  --color-outline: #CBD5E1;
+  --color-outline-variant: #E2E8F0;
   
-  --color-surface-tint: #3b82f6;
-  --color-primary: #3b82f6;
+  --color-surface-tint: #FF7A00;
+  --color-primary: #FF7A00;
   --color-on-primary: #ffffff;
-  --color-primary-container: #1d4ed8;
+  --color-primary-container: #C05621;
   --color-on-primary-container: #ffffff;
-  --color-inverse-primary: #1d4ed8;
+  --color-inverse-primary: #C05621;
   
-  --color-secondary: #f8fafc;
+  --color-secondary: #102A43;
   --color-on-secondary: #0f172a;
-  --color-secondary-container: #cbd5e1;
+  --color-secondary-container: #F5F7FA;
   --color-on-secondary-container: #0f172a;
   
-  --color-tertiary: #0ea5e9;
+  --color-tertiary: #319795;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #0369a1;
+  --color-tertiary-container: #2C7A7B;
   --color-on-tertiary-container: #ffffff;
   
-  --color-error: #f43f5e;
+  --color-error: #E53E3E;
   --color-on-error: #ffffff;
-  --color-error-container: #be123c;
-  --color-on-error-container: #ffe4e6;
+  --color-error-container: #C53030;
+  --color-on-error-container: #FED7D7;
   
-  --color-background: #030712;
-  --color-on-background: #ffffff;
-  --color-surface-variant: #14224c;
+  --color-background: #F5F7FA;
+  --color-on-background: #102A43;
+  --color-surface-variant: #E2E8F0;
 
   --font-headline: 'Geist', ui-sans-serif, sans-serif;
   --font-body: 'Inter', ui-sans-serif, sans-serif;
