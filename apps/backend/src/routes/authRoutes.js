@@ -95,10 +95,15 @@ authRouter.post('/register/company', validate(companySignupSchema), asyncHandler
   try {
     await client.query('BEGIN');
 
-    const existing = await client.query('SELECT id FROM users WHERE email = $1', [email]);
+    const existing = await client.query('SELECT * FROM users WHERE email = $1', [email]);
     if (existing.rows.length) {
       await client.query('ROLLBACK');
-      return res.status(409).json({ message: 'An account with this email already exists.' });
+      const existingUser = existing.rows[0];
+      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup');
+      return res.status(200).json({
+        message: otpInfo.delivered ? 'Account already exists. OTP sent to email.' : 'Account already exists. Dev OTP logged in backend console.',
+        devOtp: otpInfo.devOtp,
+      });
     }
 
     const passwordHash = await hashPassword(req.body.password);
@@ -140,10 +145,15 @@ authRouter.post('/register/employee', validate(employeeSignupSchema), asyncHandl
   try {
     await client.query('BEGIN');
 
-    const existing = await client.query('SELECT id FROM users WHERE email = $1', [email]);
+    const existing = await client.query('SELECT * FROM users WHERE email = $1', [email]);
     if (existing.rows.length) {
       await client.query('ROLLBACK');
-      return res.status(409).json({ message: 'An account with this email already exists.' });
+      const existingUser = existing.rows[0];
+      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup');
+      return res.status(200).json({
+        message: otpInfo.delivered ? 'Account already exists. OTP sent to email.' : 'Account already exists. Dev OTP logged in backend console.',
+        devOtp: otpInfo.devOtp,
+      });
     }
 
     const passwordHash = await hashPassword(req.body.password);
@@ -201,3 +211,4 @@ authRouter.post('/login/verify-otp', validate(otpSchema), asyncHandler(async (re
   const user = await verifyOtpAndReturnUser(req.body.email, req.body.otp, 'login');
   res.json({ message: 'Login successful.', token: signAuthToken(user), user: safeUser(user) });
 }));
+
