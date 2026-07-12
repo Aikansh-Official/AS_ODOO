@@ -24,7 +24,7 @@ export function AboutSection() {
             Logistics corridors, rebuilt around live data
           </h2>
           <p className="mt-4 font-body text-sm leading-relaxed text-on-surface-variant">
-            UrbanFlow fuses live transit networks, cargo telemetry, and distribution signals into a single operational intelligence layer. 
+            TransitOps fuses live transit networks, cargo telemetry, and distribution signals into a single operational intelligence layer. 
             We turn static shipping charts into adaptive grids, minimizing delivery delays, fuel usage, and routing errors.
           </p>
         </div>

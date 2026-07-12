@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 sm:flex-row">
         <Logo />
         <p className="font-body text-xs text-on-surface-variant">
-          &copy; {new Date().getFullYear()} UrbanFlow. All rights reserved.
+          &copy; {new Date().getFullYear()} TransitOps. All rights reserved.
         </p>
       </div>
     </footer>

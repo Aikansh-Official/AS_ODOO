@@ -38,7 +38,7 @@ export function Hero({ onNavigate }: HeroProps) {
 
         <div className="relative mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <button
-            onClick={() => onNavigate('login')}
+            onClick={() => onNavigate('signup')}
             className="group flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 font-body text-sm font-semibold text-white shadow-[0_10px_24px_rgba(255,122,0,0.22)] transition-transform hover:scale-[1.03] cursor-pointer"
           >
             Get Started
