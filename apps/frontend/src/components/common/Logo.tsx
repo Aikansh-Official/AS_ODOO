@@ -8,7 +8,7 @@ export function Logo() {
         <Waypoints className="h-4.5 w-4.5" strokeWidth={2.5} />
       </span>
       <span className="font-headline text-lg font-bold tracking-tight text-on-surface">
-        UrbanFlow
+        TransitOps
       </span>
     </div>
   );
