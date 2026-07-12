@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Logistics Command palette: White and dark shades of blue */
+  --color-surface: #0a1128;
+  --color-surface-dim: #050a18;
+  --color-surface-bright: #1b264f;
+  --color-surface-container-lowest: #02040a;
+  --color-surface-container-low: #080f24;
+  --color-surface-container: #0c1633;
+  --color-surface-container-high: #14224c;
+  --color-surface-container-highest: #1d2f66;
+  
+  --color-on-surface: #ffffff;
+  --color-on-surface-variant: #94a3b8;
+  --color-inverse-surface: #ffffff;
+  --color-inverse-on-surface: #0f172a;
+  
+  --color-outline: #223056;
+  --color-outline-variant: #111a36;
+  
+  --color-surface-tint: #3b82f6;
+  --color-primary: #3b82f6;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1d4ed8;
+  --color-on-primary-container: #ffffff;
+  --color-inverse-primary: #1d4ed8;
+  
+  --color-secondary: #f8fafc;
+  --color-on-secondary: #0f172a;
+  --color-secondary-container: #cbd5e1;
+  --color-on-secondary-container: #0f172a;
+  
+  --color-tertiary: #0ea5e9;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #0369a1;
+  --color-on-tertiary-container: #ffffff;
+  
+  --color-error: #f43f5e;
+  --color-on-error: #ffffff;
+  --color-error-container: #be123c;
+  --color-on-error-container: #ffe4e6;
+  
+  --color-background: #030712;
+  --color-on-background: #ffffff;
+  --color-surface-variant: #14224c;
+
+  --font-headline: 'Geist', ui-sans-serif, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, sans-serif;
+  --font-mono-label: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  color: var(--color-on-background);
+}
