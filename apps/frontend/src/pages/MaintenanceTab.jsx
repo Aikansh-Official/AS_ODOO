@@ -68,7 +68,7 @@ export function MaintenanceTab({ maintenance, setMaintenance, trucks, setTrucks 
                 </div>
                 <p className="text-xs text-on-surface-variant leading-relaxed">{record.description}</p>
                 <div className="flex items-center justify-between mt-auto pt-3 border-t border-outline/5">
-                  <span className="text-sm font-bold text-error font-mono-label">${record.cost.toLocaleString()}</span>
+                  <span className="text-sm font-bold text-error font-mono-label">₹{record.cost.toLocaleString()}</span>
                   {record.status === 'Open' && (
                     <button onClick={() => closeRecord(record)} className="text-[10px] font-bold px-3 py-1.5 rounded-lg bg-tertiary text-on-tertiary hover:opacity-90 cursor-pointer flex items-center gap-1"><Check className="w-3 h-3" /> Close</button>
                   )}
@@ -106,7 +106,7 @@ export function MaintenanceTab({ maintenance, setMaintenance, trucks, setTrucks 
                   <option value="Repair">Repair</option>
                 </select>
                 <textarea required value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Description of work..." rows="3" className={`${inputClass} resize-none`} />
-                <input type="number" required value={form.cost} onChange={e => setForm({ ...form, cost: e.target.value })} placeholder="Estimated Cost ($)" className={inputClass} />
+                <input type="number" required value={form.cost} onChange={e => setForm({ ...form, cost: e.target.value })} placeholder="Estimated Cost (₹)" className={inputClass} />
                 <button type="submit" className="w-full py-3 mt-1 rounded-xl bg-amber-500 text-white text-sm font-bold hover:opacity-90 cursor-pointer">Create Record</button>
               </form>
             </motion.div>

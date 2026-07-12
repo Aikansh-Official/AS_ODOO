@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, BarChart3, TrendingUp, DollarSign, Fuel } from 'lucide-react';
+import { Download, BarChart3, TrendingUp, IndianRupee, Fuel } from 'lucide-react';
 
 export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers }) {
   // Compute per-vehicle analytics
@@ -18,7 +18,7 @@ export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers })
     // Fuel efficiency: Distance / Fuel (km/L). Use odometer as proxy for total distance.
     const fuelEfficiency = totalFuelLiters > 0 ? (t.odometer / totalFuelLiters).toFixed(1) : '—';
 
-    // Revenue is mocked as a function of odometer (e.g., $2/km)
+    // Revenue is mocked as a function of odometer (e.g., ₹2/km)
     const estimatedRevenue = t.odometer * 2;
     const roi = t.acquisitionCost > 0 ? (((estimatedRevenue - totalOpsCost) / t.acquisitionCost) * 100).toFixed(1) : '—';
 
@@ -35,7 +35,7 @@ export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers })
     : '—';
 
   const exportCSV = () => {
-    const headers = ['Vehicle ID', 'Name', 'Type', 'Odometer (km)', 'Fuel Cost ($)', 'Fuel (L)', 'Fuel Efficiency (km/L)', 'Maintenance ($)', 'Expenses ($)', 'Total Ops ($)', 'Acquisition ($)', 'Est Revenue ($)', 'ROI (%)'];
+    const headers = ['Vehicle ID', 'Name', 'Type', 'Odometer (km)', 'Fuel Cost (₹)', 'Fuel (L)', 'Fuel Efficiency (km/L)', 'Maintenance (₹)', 'Expenses (₹)', 'Total Ops (₹)', 'Acquisition (₹)', 'Est Revenue (₹)', 'ROI (%)'];
     const rows = analytics.map(a => [a.id, a.name, a.type, a.odometer, a.totalFuelCost, a.totalFuelLiters, a.fuelEfficiency, a.totalMaintCost, a.totalExpenseCost, a.totalOpsCost, a.acquisitionCost, a.estimatedRevenue, a.roi]);
     const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -50,7 +50,7 @@ export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers })
   const kpiCards = [
     { label: 'Fleet Utilization', value: `${fleetUtil}%`, icon: <TrendingUp className="w-5 h-5" />, color: 'text-primary' },
     { label: 'Avg Fuel Efficiency', value: avgFuelEfficiency !== '—' ? `${avgFuelEfficiency} km/L` : '—', icon: <Fuel className="w-5 h-5" />, color: 'text-tertiary' },
-    { label: 'Total Ops Cost', value: `$${totalOpsFleet.toLocaleString()}`, icon: <DollarSign className="w-5 h-5" />, color: 'text-error' },
+    { label: 'Total Ops Cost', value: `₹${totalOpsFleet.toLocaleString()}`, icon: <IndianRupee className="w-5 h-5" />, color: 'text-error' },
     { label: 'Active Drivers', value: drivers.filter(d => d.status === 'On Trip').length, icon: <BarChart3 className="w-5 h-5" />, color: 'text-indigo-500' },
   ];
 
@@ -84,9 +84,9 @@ export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers })
                 <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider">Vehicle</th>
                 <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Odometer</th>
                 <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Fuel Eff.</th>
-                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Fuel $</th>
-                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Maint $</th>
-                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Total Ops $</th>
+                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Fuel ₹</th>
+                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Maint ₹</th>
+                <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">Total Ops ₹</th>
                 <th className="px-4 py-3 text-[10px] uppercase font-bold text-on-surface-variant tracking-wider text-right">ROI</th>
               </tr>
             </thead>
@@ -96,9 +96,9 @@ export function ReportsTab({ trucks, fuelLogs, maintenance, expenses, drivers })
                   <td className="px-4 py-3"><span className="text-xs font-bold text-on-surface">{a.name}</span><span className="block text-[10px] text-on-surface-variant font-mono-label">{a.id} • {a.type}</span></td>
                   <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">{a.odometer.toLocaleString()} km</td>
                   <td className="px-4 py-3 text-xs font-bold text-tertiary font-mono-label text-right">{a.fuelEfficiency}{a.fuelEfficiency !== '—' ? ' km/L' : ''}</td>
-                  <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">${a.totalFuelCost.toLocaleString()}</td>
-                  <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">${a.totalMaintCost.toLocaleString()}</td>
-                  <td className="px-4 py-3 text-xs font-bold font-mono-label text-error text-right">${a.totalOpsCost.toLocaleString()}</td>
+                  <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">₹{a.totalFuelCost.toLocaleString()}</td>
+                  <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">₹{a.totalMaintCost.toLocaleString()}</td>
+                  <td className="px-4 py-3 text-xs font-bold font-mono-label text-error text-right">₹{a.totalOpsCost.toLocaleString()}</td>
                   <td className="px-4 py-3 text-xs font-bold font-mono-label text-right"><span className={`${parseFloat(a.roi) >= 0 ? 'text-tertiary' : 'text-error'}`}>{a.roi}{a.roi !== '—' ? '%' : ''}</span></td>
                 </tr>
               ))}

@@ -9,7 +9,7 @@
       "phone": null,
       "is_email_verified": true,
       "created_at": "2026-07-12T09:25:40.424Z",
-      "updated_at": "2026-07-12T09:56:42.004Z"
+      "updated_at": "2026-07-12T11:20:50.916Z"
     },
     {
       "id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
@@ -146,6 +146,16 @@
       "attempts": 0,
       "consumed_at": "2026-07-12T10:17:26.988Z",
       "created_at": "2026-07-12T10:17:07.176Z"
+    },
+    {
+      "id": "451d4a3d-c092-45db-8f9e-3b7c96b98fc6",
+      "user_id": "1b060e9a-2060-42f2-b62b-6c6cdcc21c18",
+      "purpose": "login",
+      "otp_hash": "cd125d3b8d1041261aa5ed317bcb139b470816c9d2d4bc871fdf4169b24390e2",
+      "expires_at": "2026-07-12T11:30:21.624Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T11:20:50.915Z",
+      "created_at": "2026-07-12T11:20:21.624Z"
     }
   ]
 }

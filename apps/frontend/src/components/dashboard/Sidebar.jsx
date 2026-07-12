@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Truck, Users, Navigation, Wrench, DollarSign, BarChart3, LogOut } from 'lucide-react';
+import { Activity, Truck, Users, Navigation, Wrench, IndianRupee, BarChart3, LogOut } from 'lucide-react';
 import { Logo } from '../common/Logo';
 
 const TABS = [
@@ -8,7 +8,7 @@ const TABS = [
   { id: 'employees', label: 'Employees', icon: Users },
   { id: 'trips', label: 'Trips', icon: Navigation },
   { id: 'maintenance', label: 'Maintenance', icon: Wrench },
-  { id: 'finance', label: 'Finance', icon: DollarSign },
+  { id: 'finance', label: 'Finance', icon: IndianRupee },
   { id: 'reports', label: 'Reports', icon: BarChart3 },
 ];
 

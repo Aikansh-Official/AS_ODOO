@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, X, ChevronLeft, Navigation, Wrench, ShieldAlert, Zap, Droplet, MapPin, Play, StopCircle, RefreshCcw, Filter, DollarSign, Package, Check } from 'lucide-react';
+import { Plus, X, ChevronLeft, Navigation, Wrench, ShieldAlert, Zap, Droplet, MapPin, Play, StopCircle, RefreshCcw, Filter, IndianRupee, Package, Check } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import { decodeGeohash, getTruckIcon, fetchOSRMRoute, LocationSearchInput } from '../utils/mapUtils';
 import { isDriverAssignable } from '../data/mockData';
@@ -147,8 +147,8 @@ export function VehiclesTab({ trucks, setTrucks, drivers, setDrivers }) {
                     <span className="text-sm font-bold text-on-surface">{selectedVehicle.driver}</span>
                   </div>
                   <div className="p-4 rounded-xl bg-surface-container border border-outline/10 flex flex-col gap-1 text-right">
-                    <span className="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider flex items-center justify-end gap-1"><DollarSign className="w-3 h-3" /> Cost</span>
-                    <span className="text-sm font-bold text-tertiary">${selectedVehicle.acquisitionCost?.toLocaleString() || 0}</span>
+                    <span className="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider flex items-center justify-end gap-1"><IndianRupee className="w-3 h-3" /> Cost</span>
+                    <span className="text-sm font-bold text-tertiary">₹{selectedVehicle.acquisitionCost?.toLocaleString() || 0}</span>
                   </div>
                 </div>
                 <div className="flex-1 rounded-xl border border-outline/10 overflow-hidden relative min-h-[300px]">
@@ -249,7 +249,7 @@ export function VehiclesTab({ trucks, setTrucks, drivers, setDrivers }) {
             {filteredTrucks.map(truck => (
               <div key={truck.id} onClick={() => setSelectedVehicle(truck)} className="p-5 rounded-2xl bg-surface border border-outline/10 hover:border-outline/25 hover:shadow-md transition-all cursor-pointer group flex flex-col gap-4 relative overflow-hidden">
                 <div className="absolute top-0 right-0 bg-surface-container border-b border-l border-outline/10 px-3 py-1.5 rounded-bl-xl">
-                  <span className="text-[9px] font-bold text-tertiary/80 font-mono-label flex items-center gap-1"><DollarSign className="w-2.5 h-2.5" /> {truck.acquisitionCost?.toLocaleString() || 0}</span>
+                  <span className="text-[9px] font-bold text-tertiary/80 font-mono-label flex items-center gap-1"><IndianRupee className="w-2.5 h-2.5" /> {truck.acquisitionCost?.toLocaleString() || 0}</span>
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">{truck.name}</h3>
@@ -278,7 +278,7 @@ export function VehiclesTab({ trucks, setTrucks, drivers, setDrivers }) {
           <input type="text" required value={newVehicle.name} onChange={e => setNewVehicle({ ...newVehicle, name: e.target.value })} placeholder="Vehicle Name / Model" className={inputClass} />
           <input type="text" required value={newVehicle.licenseNumber} onChange={e => setNewVehicle({ ...newVehicle, licenseNumber: e.target.value })} placeholder="License Plate Number" className={inputClass} />
           <input type="number" required value={newVehicle.maxCapacity} onChange={e => setNewVehicle({ ...newVehicle, maxCapacity: e.target.value })} placeholder="Max Capacity (kg)" className={inputClass} />
-          <input type="number" required value={newVehicle.acquisitionCost} onChange={e => setNewVehicle({ ...newVehicle, acquisitionCost: e.target.value })} placeholder="Acquisition Cost ($)" className={inputClass} />
+          <input type="number" required value={newVehicle.acquisitionCost} onChange={e => setNewVehicle({ ...newVehicle, acquisitionCost: e.target.value })} placeholder="Acquisition Cost (₹)" className={inputClass} />
           <div className="grid grid-cols-2 gap-3">
             <button type="button" onClick={() => setNewVehicle({ ...newVehicle, type: 'ICE' })} className={`py-2.5 rounded-xl text-xs font-bold border cursor-pointer flex items-center justify-center gap-2 ${newVehicle.type === 'ICE' ? 'bg-primary/10 border-primary text-primary' : 'bg-surface-container border-outline/10 text-on-surface-variant'}`}><Droplet className="w-4 h-4" /> ICE</button>
             <button type="button" onClick={() => setNewVehicle({ ...newVehicle, type: 'EV' })} className={`py-2.5 rounded-xl text-xs font-bold border cursor-pointer flex items-center justify-center gap-2 ${newVehicle.type === 'EV' ? 'bg-primary/10 border-primary text-primary' : 'bg-surface-container border-outline/10 text-on-surface-variant'}`}><Zap className="w-4 h-4" /> EV</button>

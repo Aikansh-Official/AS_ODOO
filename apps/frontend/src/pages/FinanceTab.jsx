@@ -72,7 +72,7 @@ export function FinanceTab({ fuelLogs, setFuelLogs, expenses, setExpenses, truck
                       <td className="px-4 py-3 text-xs font-bold font-mono-label text-on-surface">{log.id}</td>
                       <td className="px-4 py-3 text-xs text-on-surface">{v?.name || log.vehicleId}</td>
                       <td className="px-4 py-3 text-xs text-on-surface">{log.liters > 0 ? `${log.liters} L` : '— (EV)'}</td>
-                      <td className="px-4 py-3 text-xs font-bold text-error font-mono-label">${log.cost}</td>
+                      <td className="px-4 py-3 text-xs font-bold text-error font-mono-label">₹{log.cost}</td>
                       <td className="px-4 py-3 text-xs text-on-surface-variant font-mono-label">{log.odometerAtFill.toLocaleString()} km</td>
                       <td className="px-4 py-3 text-xs text-on-surface-variant">{log.date}</td>
                     </tr>
@@ -105,7 +105,7 @@ export function FinanceTab({ fuelLogs, setFuelLogs, expenses, setExpenses, truck
                       <td className="px-4 py-3 text-xs font-bold font-mono-label text-on-surface">{exp.id}</td>
                       <td className="px-4 py-3 text-xs text-on-surface">{v?.name || exp.vehicleId}</td>
                       <td className="px-4 py-3"><span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">{exp.category}</span></td>
-                      <td className="px-4 py-3 text-xs font-bold text-error font-mono-label">${exp.amount}</td>
+                      <td className="px-4 py-3 text-xs font-bold text-error font-mono-label">₹{exp.amount}</td>
                       <td className="px-4 py-3 text-xs text-on-surface-variant">{exp.date}</td>
                       <td className="px-4 py-3 text-xs text-on-surface-variant">{exp.description}</td>
                     </tr>
@@ -133,10 +133,10 @@ export function FinanceTab({ fuelLogs, setFuelLogs, expenses, setExpenses, truck
                 {vehicleCostSummary.map(v => (
                   <tr key={v.id} className="border-b border-outline/5 hover:bg-surface-container-low transition-colors">
                     <td className="px-4 py-3"><span className="text-xs font-bold text-on-surface">{v.name}</span><span className="block text-[10px] text-on-surface-variant font-mono-label">{v.id}</span></td>
-                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">${v.totalFuel.toLocaleString()}</td>
-                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">${v.totalMaint.toLocaleString()}</td>
-                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">${v.totalExpenses.toLocaleString()}</td>
-                    <td className="px-4 py-3 text-xs font-bold font-mono-label text-error text-right">${v.totalOps.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">₹{v.totalFuel.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">₹{v.totalMaint.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-xs font-mono-label text-on-surface text-right">₹{v.totalExpenses.toLocaleString()}</td>
+                    <td className="px-4 py-3 text-xs font-bold font-mono-label text-error text-right">₹{v.totalOps.toLocaleString()}</td>
                   </tr>
                 ))}
                 {vehicleCostSummary.length === 0 && <tr><td colSpan={5} className="px-4 py-12 text-center text-xs text-on-surface-variant">No cost data yet.</td></tr>}
@@ -163,7 +163,7 @@ export function FinanceTab({ fuelLogs, setFuelLogs, expenses, setExpenses, truck
                 </select>
                 <div className="grid grid-cols-2 gap-3">
                   <input type="number" required value={fuelForm.liters} onChange={e => setFuelForm({ ...fuelForm, liters: e.target.value })} placeholder="Liters (0 if EV)" className={inputClass} />
-                  <input type="number" required value={fuelForm.cost} onChange={e => setFuelForm({ ...fuelForm, cost: e.target.value })} placeholder="Cost ($)" className={inputClass} />
+                  <input type="number" required value={fuelForm.cost} onChange={e => setFuelForm({ ...fuelForm, cost: e.target.value })} placeholder="Cost (₹)" className={inputClass} />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <input type="date" required value={fuelForm.date} onChange={e => setFuelForm({ ...fuelForm, date: e.target.value })} className={inputClass} />
@@ -198,7 +198,7 @@ export function FinanceTab({ fuelLogs, setFuelLogs, expenses, setExpenses, truck
                   <option value="Other">Other</option>
                 </select>
                 <div className="grid grid-cols-2 gap-3">
-                  <input type="number" required value={expenseForm.amount} onChange={e => setExpenseForm({ ...expenseForm, amount: e.target.value })} placeholder="Amount ($)" className={inputClass} />
+                  <input type="number" required value={expenseForm.amount} onChange={e => setExpenseForm({ ...expenseForm, amount: e.target.value })} placeholder="Amount (₹)" className={inputClass} />
                   <input type="date" required value={expenseForm.date} onChange={e => setExpenseForm({ ...expenseForm, date: e.target.value })} className={inputClass} />
                 </div>
                 <input type="text" value={expenseForm.description} onChange={e => setExpenseForm({ ...expenseForm, description: e.target.value })} placeholder="Description" className={inputClass} />
