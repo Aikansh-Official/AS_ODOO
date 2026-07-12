@@ -37,7 +37,17 @@ export function Navbar({ active, setActive }: NavbarProps) {
         ))}
       </nav>
 
-      <div className="flex w-[132px] items-center justify-end">
+      <div className="flex items-center justify-end gap-2">
+        <button
+          onClick={() => setActive('employeePortal')}
+          className={`hidden rounded-full border px-4 py-2 font-body text-xs font-semibold transition-all cursor-pointer sm:inline-flex ${
+            active === 'employeePortal'
+              ? 'border-tertiary bg-tertiary text-white shadow-[0_8px_20px_rgba(49,151,149,0.18)]'
+              : 'border-outline bg-white text-on-surface-variant hover:border-tertiary hover:text-tertiary'
+          }`}
+        >
+          Driver Portal
+        </button>
         <button
           onClick={() => setActive('login')}
           className={`rounded-full border px-5 py-2 font-body text-xs font-semibold transition-all cursor-pointer ${

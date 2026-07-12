@@ -16,6 +16,8 @@ import { SignupRolePage } from './SignupRolePage';
 import { CompanySignupPage } from './CompanySignupPage';
 // @ts-ignore
 import { EmployeeSignupPage } from './EmployeeSignupPage';
+// @ts-ignore
+import { EmployeePortal } from './EmployeePortal';
 
 export function LandingPage() {
   const [activeTab, setActiveTab] = useState(() => {
@@ -131,6 +133,18 @@ export function LandingPage() {
                 className="w-full flex justify-center items-center"
               >
                 <EmployeeSignupPage onNavigate={handleNavigate} />
+              </motion.div>
+            )}
+            {activeTab === 'employeePortal' && (
+              <motion.div
+                key="employeePortal"
+                initial={{ opacity: 0, scale: 0.96, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: -15 }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="w-full flex justify-center items-center"
+              >
+                <EmployeePortal onNavigate={handleNavigate} />
               </motion.div>
             )}
             {activeTab === 'dashboard' && (

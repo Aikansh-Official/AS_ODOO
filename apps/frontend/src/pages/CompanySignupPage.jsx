@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Building2, KeyRound, Lock, Mail, ShieldCheck, Tr
 import { Toast } from '../components/common/Toast';
 import { authApi, storeSession } from '../services/authApi';
 import { passwordHelp, validateCompanySignup, validateOtp } from '../services/authValidation';
+import { setActiveCompanyCode } from '../services/fleetStore';
 
 const inputClass =
   'w-full rounded-xl border border-outline-variant bg-surface-container-low px-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/60 transition-all focus:border-primary/60 focus:outline-none focus:ring-1 focus:ring-primary/30';
@@ -43,6 +44,7 @@ export function CompanySignupPage({ onNavigate }) {
     setIsLoading(true);
     try {
       const result = await authApi.registerCompany(form);
+      if (result.inviteCode) setActiveCompanyCode(result.inviteCode);
       setOtpSent(true);
       setOtp('');
       showToast('success', result.devOtp ? `OTP generated. Demo OTP: ${result.devOtp}` : 'Account created. OTP sent to business email.');

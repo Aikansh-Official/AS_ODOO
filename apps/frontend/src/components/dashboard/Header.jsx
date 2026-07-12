@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bell, RefreshCw } from 'lucide-react';
+import { Bell, RefreshCw, Copy, Check, KeyRound } from 'lucide-react';
 import { MOCK_NOTIFICATIONS } from '../../data/mockData';
+import { getActiveCompanyCode } from '../../services/fleetStore';
 
 const TAB_TITLES = {
   overview: { title: 'Operations Center', desc: 'Comprehensive fleet status tracking.', badge: true },
@@ -39,6 +40,7 @@ export function Header({ activeTab }) {
         <p className="mt-1 font-body text-xs text-on-surface-variant">{meta.desc}</p>
       </div>
       <div className="flex items-center gap-3">
+        <CompanyCodeBadge />
         <button
           onClick={handleRefresh}
           className={`p-2.5 rounded-full border border-outline/15 bg-surface-container hover:bg-surface-container-high transition-all text-on-surface-variant hover:text-on-surface cursor-pointer ${isRefreshing ? 'animate-spin' : ''}`}
@@ -92,5 +94,43 @@ export function Header({ activeTab }) {
         </div>
       </div>
     </header>
+  );
+}
+
+function CompanyCodeBadge() {
+  const [code] = useState(() => getActiveCompanyCode());
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      // Clipboard API can be blocked; fall back to a temporary textarea.
+      const el = document.createElement('textarea');
+      el.value = code;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      title="Copy your company code — share it with drivers to access the Driver Portal"
+      className="group flex items-center gap-2 rounded-full border border-outline/15 bg-surface-container pl-3 pr-2.5 py-2 hover:bg-surface-container-high transition-all cursor-pointer"
+    >
+      <KeyRound className="h-3.5 w-3.5 text-primary" />
+      <span className="hidden sm:inline text-[9px] font-bold uppercase tracking-wider text-on-surface-variant">Company Code</span>
+      <span className="font-mono-label text-xs font-bold text-on-surface">{code}</span>
+      {copied ? (
+        <Check className="h-3.5 w-3.5 text-tertiary" />
+      ) : (
+        <Copy className="h-3.5 w-3.5 text-on-surface-variant group-hover:text-primary" />
+      )}
+    </button>
   );
 }
