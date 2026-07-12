@@ -6,13 +6,15 @@ import { Footer } from '../components/layout/Footer';
 import { Hero } from '../features/hero/Hero';
 import { FeaturesSection } from '../features/features-section/FeaturesSection';
 import { AboutSection } from '../features/about/AboutSection';
+// @ts-ignore
+import { LoginPage } from './LoginPage';
 
 export function LandingPage() {
   const [activeTab, setActiveTab] = useState('home');
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-background text-on-surface flex flex-col justify-between">
-      <BackgroundScene />
+    <div className="relative h-screen w-screen overflow-hidden text-on-surface flex flex-col justify-between">
+      {activeTab !== 'home' && <BackgroundScene />}
       
       <Navbar active={activeTab} setActive={setActiveTab} />
       
@@ -53,6 +55,18 @@ export function LandingPage() {
                 className="w-full flex justify-center items-center"
               >
                 <AboutSection />
+              </motion.div>
+            )}
+            {activeTab === 'login' && (
+              <motion.div
+                key="login"
+                initial={{ opacity: 0, scale: 0.96, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: -15 }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="w-full flex justify-center items-center"
+              >
+                <LoginPage onNavigate={setActiveTab} />
               </motion.div>
             )}
           </AnimatePresence>

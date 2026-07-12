@@ -1,0 +1,116 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Lock, ArrowRight, ShieldAlert } from 'lucide-react';
+import { Logo } from '../components/common/Logo';
+
+export function LoginPage({ onNavigate }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate sign-in transition
+    setTimeout(() => {
+      setIsLoading(false);
+      onNavigate('home');
+    }, 1200);
+  };
+
+  return (
+    <section className="w-full max-w-md px-4 flex flex-col items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: -15 }}
+        transition={{ duration: 0.4 }}
+        className="w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-8 md:p-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05),_0_24px_50px_-12px_rgba(0,0,0,0.8)] backdrop-blur-3xl"
+      >
+        {/* Header */}
+        <div className="flex flex-col items-center text-center">
+          <Logo />
+          <h2 className="mt-6 font-headline text-2xl font-bold tracking-tight text-on-surface">
+            Control Center Access
+          </h2>
+          <p className="mt-2 font-body text-xs text-on-surface-variant">
+            Welcome back! Please enter your logistics credentials.
+          </p>
+        </div>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
+          <div className="relative">
+            <span className="absolute inset-y-0 left-4 flex items-center text-on-surface-variant">
+              <Mail className="h-4.5 w-4.5" />
+            </span>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="operator@urbanflow.com"
+              className="w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
+            />
+          </div>
+
+          <div className="relative">
+            <span className="absolute inset-y-0 left-4 flex items-center text-on-surface-variant">
+              <Lock className="h-4.5 w-4.5" />
+            </span>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="w-full rounded-xl border border-white/10 bg-white/5 pl-11 pr-4 py-3 font-body text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30 transition-all"
+            />
+          </div>
+
+          {/* Remember & Forgot */}
+          <div className="flex items-center justify-between text-[11px] font-body text-on-surface-variant">
+            <label className="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" className="accent-primary rounded bg-white/5 border-white/10" />
+              <span>Remember station</span>
+            </label>
+            <a href="#" className="hover:text-primary transition-colors">
+              Reset keycard
+            </a>
+          </div>
+
+          {/* Actions */}
+          <div className="mt-4 flex flex-col gap-2">
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="group relative flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary to-tertiary py-3 font-body text-sm font-semibold text-white shadow-[0_4px_16px_rgba(59,130,246,0.3)] transition-transform hover:scale-[1.02] active:scale-98 cursor-pointer disabled:opacity-55"
+            >
+              {isLoading ? (
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+              ) : (
+                <>
+                  Authenticate
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => onNavigate('home')}
+              className="rounded-xl border border-white/10 bg-white/5 py-3 font-body text-sm font-semibold text-on-surface hover:bg-white/10 transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        {/* Trust signal footer */}
+        <div className="mt-6 flex items-center justify-center gap-2 text-[10px] font-mono-label text-on-surface-variant/60">
+          <ShieldAlert className="h-3.5 w-3.5" />
+          <span>AES-256 Encrypted Telemetry</span>
+        </div>
+      </motion.div>
+    </section>
+  );
+}

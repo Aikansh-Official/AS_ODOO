@@ -38,7 +38,18 @@ export function Navbar({ active, setActive }: NavbarProps) {
         ))}
       </nav>
 
-      <div className="hidden w-[132px] md:block" aria-hidden />
+      <div className="flex items-center justify-end w-[132px]">
+        <button
+          onClick={() => setActive('login')}
+          className={`px-5 py-2 font-body text-xs font-semibold rounded-full border transition-all cursor-pointer ${
+            active === 'login'
+              ? 'bg-primary text-white border-primary shadow-[0_0_12px_rgba(59,130,246,0.3)]'
+              : 'border-white/10 bg-white/5 text-on-surface-variant hover:text-white hover:bg-white/10'
+          }`}
+        >
+          Sign In
+        </button>
+      </div>
     </header>
   );
 }
