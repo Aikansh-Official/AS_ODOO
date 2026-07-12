@@ -14,7 +14,7 @@ export function LoginPage({ onNavigate }) {
     // Simulate sign-in transition
     setTimeout(() => {
       setIsLoading(false);
-      onNavigate('home');
+      onNavigate('dashboard');
     }, 1200);
   };
 
