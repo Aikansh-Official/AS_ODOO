@@ -48,7 +48,7 @@ export function Hero({ onNavigate }: HeroProps) {
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </button>
           <button
-            onClick={() => onNavigate('features')}
+            onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
             className="rounded-full border border-white/10 bg-white/5 px-7 py-3.5 font-body text-sm font-semibold text-on-surface backdrop-blur-md transition-colors hover:bg-white/10 cursor-pointer"
           >
             Learn More

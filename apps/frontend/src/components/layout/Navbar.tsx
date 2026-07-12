@@ -3,7 +3,6 @@ import { Logo } from '../common/Logo';
 
 const NAV_LINKS = [
   { id: 'home', label: 'Home' },
-  { id: 'features', label: 'Features' },
   { id: 'about', label: 'About Us' },
 ];
 
