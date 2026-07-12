@@ -78,7 +78,7 @@ export function executeJsonDbQuery(sql, params) {
 
   // 5. INSERT INTO email_otps
   if (cleanSql.startsWith('INSERT INTO email_otps')) {
-    const [userId, purpose, otpHash, expiresAt] = params;
+    const [userId, purpose, otpHash, expiresAt, pendingPasswordHash] = params;
     const newOtp = {
       id: crypto.randomUUID(),
       user_id: userId,
@@ -94,14 +94,14 @@ export function executeJsonDbQuery(sql, params) {
     return { rows: [newOtp] };
   }
 
-  // 6. SELECT * FROM email_otps WHERE user_id = $1 AND purpose = $2 AND consumed_at IS NULL ORDER BY created_at DESC LIMIT 1
-  if (cleanSql.includes('SELECT * FROM email_otps') && cleanSql.includes('ORDER BY created_at DESC LIMIT 1')) {
+  // 6. SELECT * FROM email_otps WHERE user_id = $1 AND purpose = $2 AND consumed_at IS NULL
+  if (cleanSql.includes('SELECT * FROM email_otps') && cleanSql.includes('WHERE user_id =') && cleanSql.includes('AND purpose =')) {
     const userId = params[0];
     const purpose = params[1];
     const matching = db.email_otps
       .filter(o => o.user_id === userId && o.purpose === purpose && !o.consumed_at)
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-    return { rows: matching[0] ? [matching[0]] : [] };
+    return { rows: cleanSql.includes('LIMIT 1') ? (matching[0] ? [matching[0]] : []) : matching };
   }
 
   // 7. UPDATE email_otps SET attempts = attempts + 1 WHERE id = $1
@@ -122,6 +122,17 @@ export function executeJsonDbQuery(sql, params) {
     return { rows: [] };
   }
 
+  // 8b. UPDATE users SET password_hash = $1, updated_at = now() WHERE id = $2
+  if (cleanSql.includes('UPDATE users SET password_hash =')) {
+    const [passwordHash, id] = params;
+    const u = db.users.find(x => x.id === id);
+    if (u) {
+      u.password_hash = passwordHash;
+      u.updated_at = new Date().toISOString();
+    }
+    writeDb(db);
+    return { rows: [] };
+  }
   // 9. UPDATE users SET is_email_verified = true, updated_at = now() WHERE id = $1
   if (cleanSql.includes('UPDATE users SET is_email_verified = true')) {
     const id = params[0];

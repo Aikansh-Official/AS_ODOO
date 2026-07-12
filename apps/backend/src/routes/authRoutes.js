@@ -23,21 +23,16 @@ import { sendOtpEmail } from '../services/emailService.js';
 
 export const authRouter = express.Router();
 
-async function createOtp(userId, email, purpose) {
+async function createOtp(userId, email, purpose, options = {}) {
   const otp = generateOtp();
   const otpHash = hashOtp(otp);
   const expiresAt = new Date(Date.now() + config.otpExpiresMinutes * 60 * 1000);
 
-  await query(
-    `UPDATE email_otps SET consumed_at = now()
-     WHERE user_id = $1 AND purpose = $2 AND consumed_at IS NULL`,
-    [userId, purpose]
-  );
 
   await query(
-    `INSERT INTO email_otps (user_id, purpose, otp_hash, expires_at)
-     VALUES ($1, $2, $3, $4)`,
-    [userId, purpose, otpHash, expiresAt]
+    `INSERT INTO email_otps (user_id, purpose, otp_hash, expires_at, pending_password_hash)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [userId, purpose, otpHash, expiresAt, options.pendingPasswordHash || null]
   );
 
   return sendOtpEmail({ to: email, otp, purpose });
@@ -56,33 +51,34 @@ async function verifyOtpAndReturnUser(email, otp, purpose) {
 
   const otpResult = await query(
     `SELECT * FROM email_otps
-     WHERE user_id = $1 AND purpose = $2 AND consumed_at IS NULL
-     ORDER BY created_at DESC
-     LIMIT 1`,
+     WHERE user_id = $1 AND purpose = $2 AND consumed_at IS NULL`,
     [user.id, purpose]
   );
-  const otpRecord = otpResult.rows[0];
+  const now = Date.now();
+  const validOtpRecords = otpResult.rows
+    .filter((record) => new Date(record.expires_at).getTime() >= now && record.attempts < 5)
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-  if (!otpRecord || new Date(otpRecord.expires_at).getTime() < Date.now()) {
+  if (!validOtpRecords.length) {
     const error = new Error('OTP expired. Request a new OTP.');
     error.statusCode = 400;
     throw error;
   }
 
-  if (otpRecord.attempts >= 5) {
-    const error = new Error('Too many wrong OTP attempts. Request a new OTP.');
-    error.statusCode = 429;
-    throw error;
-  }
+  const otpHash = hashOtp(otp);
+  const otpRecord = validOtpRecords.find((record) => record.otp_hash === otpHash);
 
-  if (otpRecord.otp_hash !== hashOtp(otp)) {
-    await query('UPDATE email_otps SET attempts = attempts + 1 WHERE id = $1', [otpRecord.id]);
+  if (!otpRecord) {
+    await query('UPDATE email_otps SET attempts = attempts + 1 WHERE id = $1', [validOtpRecords[0].id]);
     const error = new Error('Wrong OTP. Please check your email and try again.');
     error.statusCode = 400;
     throw error;
   }
 
   await query('UPDATE email_otps SET consumed_at = now() WHERE id = $1', [otpRecord.id]);
+  if (otpRecord.pending_password_hash) {
+    await query('UPDATE users SET password_hash = $1, updated_at = now() WHERE id = $2', [otpRecord.pending_password_hash, user.id]);
+  }
   await query('UPDATE users SET is_email_verified = true, updated_at = now() WHERE id = $1', [user.id]);
 
   return { ...user, is_email_verified: true };
@@ -99,7 +95,8 @@ authRouter.post('/register/company', validate(companySignupSchema), asyncHandler
     if (existing.rows.length) {
       await client.query('ROLLBACK');
       const existingUser = existing.rows[0];
-      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup');
+      const pendingPasswordHash = await hashPassword(req.body.password);
+      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup', { pendingPasswordHash });
       return res.status(200).json({
         message: otpInfo.delivered ? 'Account already exists. OTP sent to email.' : 'Account already exists. Dev OTP logged in backend console.',
         devOtp: otpInfo.devOtp,
@@ -149,7 +146,8 @@ authRouter.post('/register/employee', validate(employeeSignupSchema), asyncHandl
     if (existing.rows.length) {
       await client.query('ROLLBACK');
       const existingUser = existing.rows[0];
-      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup');
+      const pendingPasswordHash = await hashPassword(req.body.password);
+      const otpInfo = await createOtp(existingUser.id, existingUser.email, 'signup', { pendingPasswordHash });
       return res.status(200).json({
         message: otpInfo.delivered ? 'Account already exists. OTP sent to email.' : 'Account already exists. Dev OTP logged in backend console.',
         devOtp: otpInfo.devOtp,
@@ -196,11 +194,13 @@ authRouter.post('/login/request-otp', validate(loginStartSchema), asyncHandler(a
   const result = await query('SELECT * FROM users WHERE email = $1', [email]);
   const user = result.rows[0];
 
-  if (!user || !(await comparePassword(req.body.password, user.password_hash))) {
-    return res.status(401).json({ message: 'Invalid email or password.' });
+  if (!user) {
+    return res.status(404).json({ message: 'Account not found. Please sign up first.' });
   }
 
-  const otpInfo = await createOtp(user.id, user.email, 'login');
+  const passwordMatches = await comparePassword(req.body.password, user.password_hash);
+  const pendingPasswordHash = passwordMatches ? null : await hashPassword(req.body.password);
+  const otpInfo = await createOtp(user.id, user.email, 'login', { pendingPasswordHash });
   res.json({
     message: otpInfo.delivered ? 'OTP sent to email.' : 'Dev OTP logged in backend console.',
     devOtp: otpInfo.devOtp,

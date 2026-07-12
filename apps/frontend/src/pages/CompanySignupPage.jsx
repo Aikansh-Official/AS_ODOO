@@ -61,7 +61,7 @@ export function CompanySignupPage({ onNavigate }) {
 
     setIsLoading(true);
     try {
-      const result = await authApi.verifySignup({ email: form.email, otp });
+      const result = await authApi.verifySignup({ email: form.email.trim().toLowerCase(), otp });
       storeSession(result);
       showToast('success', 'Company signup verified successfully.');
       window.setTimeout(() => onNavigate('dashboard'), 700);
@@ -181,7 +181,7 @@ export function CompanySignupPage({ onNavigate }) {
                   <KeyRound className="absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-on-surface-variant" />
                   <input className={iconInputClass} required  inputMode="numeric" maxLength={6} value={otp} onChange={(event) => setOtp(event.target.value.replace(/\D/g, '').slice(0, 6))} placeholder='Enter 6-digit OTP' />
                 </span>
-                <span className="font-body text-[11px] leading-5 text-on-surface-variant">Type the 6-digit OTP you received by email.</span>
+                <span className="font-body text-[11px] leading-5 text-on-surface-variant">Type any unexpired 6-digit OTP you received by email.</span>
               </label>
 
               <label className="mt-1 flex items-start gap-3 font-body text-xs leading-6 text-on-surface-variant">
@@ -217,4 +217,3 @@ export function CompanySignupPage({ onNavigate }) {
     </section>
   );
 }
-
