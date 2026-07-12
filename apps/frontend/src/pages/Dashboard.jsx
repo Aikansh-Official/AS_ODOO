@@ -35,7 +35,7 @@ export function Dashboard({ onNavigate }) {
       <main className="flex-1 flex flex-col min-w-0 h-full relative overflow-y-auto bg-background p-6 md:p-8">
         <Header activeTab={activeTab} />
 
-        {activeTab === 'overview' && <OverviewTab trucks={trucks} drivers={drivers} />}
+        {activeTab === 'overview' && <OverviewTab trucks={trucks} drivers={drivers} trips={trips} />}
         {activeTab === 'vehicles' && <VehiclesTab trucks={trucks} setTrucks={setTrucks} drivers={drivers} setDrivers={setDrivers} />}
         {activeTab === 'employees' && <EmployeesTab drivers={drivers} setDrivers={setDrivers} />}
         {activeTab === 'trips' && <TripsTab trips={trips} setTrips={setTrips} trucks={trucks} setTrucks={setTrucks} drivers={drivers} setDrivers={setDrivers} />}

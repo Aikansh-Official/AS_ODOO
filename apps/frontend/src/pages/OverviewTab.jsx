@@ -17,7 +17,7 @@ function MapController({ selectedTruck }) {
   return null;
 }
 
-export function OverviewTab({ trucks, drivers }) {
+export function OverviewTab({ trucks, drivers, trips = [] }) {
   const onTripTrucks = trucks.filter(t => t.status === 'On Trip');
   const [selectedTruck, setSelectedTruck] = useState(onTripTrucks[0] || null);
   const [routePath, setRoutePath] = useState([]);
@@ -36,7 +36,7 @@ export function OverviewTab({ trucks, drivers }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }} className="w-full flex-1 flex flex-col gap-6 md:gap-8">
-      <KpiRibbon trucks={trucks} drivers={drivers} />
+      <KpiRibbon trucks={trucks} drivers={drivers} trips={trips} />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full items-stretch flex-1">
         {/* Map */}

@@ -57,7 +57,7 @@ export function FeaturesSection() {
       </div>
 
       {/* Horizontal Tabs Selection bar */}
-      <div className="w-full overflow-x-auto flex gap-1.5 justify-start md:justify-center p-1 bg-white rounded-xl border border-outline-variant mb-6 max-w-4xl scrollbar-none whitespace-nowrap shadow-sm">
+      <div className="w-full overflow-x-auto flex gap-1.5 justify-start md:justify-center p-1.5 bg-surface-container-low rounded-xl border border-outline-variant mb-6 max-w-4xl scrollbar-none whitespace-nowrap shadow-sm">
         {FEATURES.map((feature, idx) => {
           const isActive = idx === activeIndex;
           const FIcon = feature.icon;
@@ -65,17 +65,22 @@ export function FeaturesSection() {
             <button
               key={feature.title}
               onClick={() => navigateTo(idx)}
-              className="relative px-4 py-2 font-body text-xs font-semibold rounded-lg text-on-surface-variant transition-colors hover:text-on-surface flex items-center gap-2 cursor-pointer"
+              className={`relative px-4 py-2 font-body text-xs font-semibold rounded-lg transition-all flex items-center gap-2 cursor-pointer z-10 ${
+                isActive
+                  ? 'text-primary'
+                  : 'text-on-surface-variant hover:text-on-surface'
+              }`}
             >
               {isActive && (
                 <motion.span
                   layoutId="active-feature-tab"
-                  className="absolute inset-0 rounded-lg bg-secondary-container border border-outline-variant shadow-sm"
+                  className="absolute inset-0 rounded-lg bg-white border border-primary/30 shadow-md"
+                  style={{ boxShadow: '0 2px 8px rgba(255,122,0,0.15)' }}
                   transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                 />
               )}
-              <FIcon className={`h-3.5 w-3.5 ${isActive ? 'text-primary' : 'text-on-surface-variant'}`} />
-              <span className={isActive ? 'text-on-surface' : ''}>{feature.title}</span>
+              <FIcon className={`relative h-3.5 w-3.5 ${isActive ? 'text-primary' : 'text-on-surface-variant'}`} />
+              <span className="relative">{feature.title}</span>
             </button>
           );
         })}

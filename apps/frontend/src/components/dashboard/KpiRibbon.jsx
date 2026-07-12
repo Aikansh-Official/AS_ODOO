@@ -1,13 +1,13 @@
 import React from 'react';
 
-export function KpiRibbon({ trucks, drivers }) {
+export function KpiRibbon({ trucks, drivers, trips = [] }) {
   const kpiActiveVehicles = trucks.filter(t => t.status === 'On Trip').length;
   const kpiAvailableVehicles = trucks.filter(t => t.status === 'Available').length;
   const kpiVehiclesInShop = trucks.filter(t => t.status === 'In Shop').length;
   const kpiDriversOnDuty = drivers.filter(d => d.status === 'On Trip').length;
   const totalOperational = trucks.filter(t => t.status !== 'Retired').length;
   const fleetUtilPercent = totalOperational > 0 ? Math.round((kpiActiveVehicles / totalOperational) * 100) : 0;
-  const kpiPendingTrips = 0;
+  const kpiPendingTrips = trips.filter(t => t.status === 'Draft' || t.status === 'draft').length;
 
   const cards = [
     { label: 'Active Vehicles', value: kpiActiveVehicles, color: 'text-primary' },

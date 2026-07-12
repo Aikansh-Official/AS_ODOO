@@ -10,6 +10,17 @@
       "is_email_verified": true,
       "created_at": "2026-07-12T09:25:40.424Z",
       "updated_at": "2026-07-12T09:56:42.004Z"
+    },
+    {
+      "id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "account_type": "company",
+      "full_name": "Aikansh",
+      "email": "redwingactive@gmail.com",
+      "password_hash": "$2a$12$j0vM0TagTupfG80qYKW1JerpMudBq0G/WIjzK4IIVKRNKNx3HLZZS",
+      "phone": null,
+      "is_email_verified": true,
+      "created_at": "2026-07-12T09:47:09.958Z",
+      "updated_at": "2026-07-12T10:17:26.989Z"
     }
   ],
   "companies": [
@@ -22,6 +33,16 @@
       "primary_fleet_type": "Truck",
       "invite_code": "CHINT-EDFBFD",
       "created_at": "2026-07-12T09:25:40.424Z"
+    },
+    {
+      "id": "dfbff542-f861-4d34-86ab-054181e17b35",
+      "owner_user_id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "company_name": "Red wing",
+      "industry": "Logistics & Delivery",
+      "fleet_size": "1-10 vehicles",
+      "primary_fleet_type": "trucks",
+      "invite_code": "REDWI-587C52",
+      "created_at": "2026-07-12T09:47:09.959Z"
     }
   ],
   "employee_profiles": [],
@@ -85,6 +106,46 @@
       "attempts": 0,
       "consumed_at": "2026-07-12T09:56:42.003Z",
       "created_at": "2026-07-12T09:56:20.044Z"
+    },
+    {
+      "id": "f591a540-79e0-487d-b219-4c0b311f94ef",
+      "user_id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "purpose": "signup",
+      "otp_hash": "916bd85b48864a1884e89b600f52646e8a3936822c7b8745d0706dd5697b1501",
+      "expires_at": "2026-07-12T09:57:09.961Z",
+      "attempts": 2,
+      "consumed_at": "2026-07-12T09:47:42.548Z",
+      "created_at": "2026-07-12T09:47:09.961Z"
+    },
+    {
+      "id": "d327966a-c333-4fe0-804a-3738fdb38b3f",
+      "user_id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "purpose": "login",
+      "otp_hash": "a3a8ce1b50cb92fbfb70cb445e50d6d1d10fd9422e2bbff77e0649427fe9c7e2",
+      "expires_at": "2026-07-12T10:26:30.971Z",
+      "attempts": 0,
+      "consumed_at": null,
+      "created_at": "2026-07-12T10:16:30.972Z"
+    },
+    {
+      "id": "aa11d8e0-aa53-48d2-999a-8f6010aa2e09",
+      "user_id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "purpose": "login",
+      "otp_hash": "5013f4ad7690837c8d27902bf0f346e3e8223faaf9b916339d51681b908dad40",
+      "expires_at": "2026-07-12T10:26:57.920Z",
+      "attempts": 0,
+      "consumed_at": null,
+      "created_at": "2026-07-12T10:16:57.920Z"
+    },
+    {
+      "id": "2808b9cd-f123-40ae-95e2-0c386c003b51",
+      "user_id": "af0474fe-910b-4e81-b9e6-398b3cb0513f",
+      "purpose": "login",
+      "otp_hash": "6dd01bdc6509eb93fa19370dd632ab8e1faebe2670a23716437bb4ff0d056387",
+      "expires_at": "2026-07-12T10:27:07.176Z",
+      "attempts": 0,
+      "consumed_at": "2026-07-12T10:17:26.988Z",
+      "created_at": "2026-07-12T10:17:07.176Z"
     }
   ]
 }
