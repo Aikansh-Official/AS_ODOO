@@ -28,7 +28,7 @@ export function LoginPage({ onNavigate }) {
 
     setIsLoading(true);
     try {
-      const result = await authApi.requestLoginOtp({ email, password });
+      const result = await authApi.requestLoginOtp({ email: email.trim().toLowerCase(), password });
       setOtpSent(true);
       setOtp('');
       showToast('success', result.devOtp ? `OTP generated. Demo OTP: ${result.devOtp}` : 'OTP sent to your email.');
@@ -49,7 +49,7 @@ export function LoginPage({ onNavigate }) {
 
     setIsLoading(true);
     try {
-      const result = await authApi.verifyLoginOtp({ email, otp });
+      const result = await authApi.verifyLoginOtp({ email: email.trim().toLowerCase(), otp });
       storeSession(result);
       showToast('success', 'Login successful. Opening dashboard...');
       window.setTimeout(() => onNavigate('dashboard'), 700);
@@ -130,7 +130,7 @@ export function LoginPage({ onNavigate }) {
               />
             </div>
             <p className="mt-1.5 font-body text-[11px] leading-5 text-on-surface-variant">
-              Type the 6-digit OTP you received by email.
+              Type any unexpired 6-digit OTP you received by email.
             </p>
           </div>
 
@@ -184,4 +184,3 @@ export function LoginPage({ onNavigate }) {
     </section>
   );
 }
-
